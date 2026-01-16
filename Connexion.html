@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Connexion illimité</title>
+</head>
+<body>
+
+<h3>Notification importante</h3>
+<p>Cliquez pour activer les notifications.</p>
+
+<button onclick="askPermission()">Activer</button>
+
+<script>
+function askPermission() {
+  Notification.requestPermission().then(permission => {
+    if (permission === "granted") {
+      alert("Autorisation accordée");
+    } else {
+      alert("Autorisation refusée");
+    }
+  });
+}
+</script>
+
+</body>
+</html>
