@@ -7,19 +7,23 @@
 <body>
 
 <h3>Notification importante</h3>
-<p>Cliquez pour activer les notifications.</p>
-
-<button onclick="askPermission()">Activer</button>
+<button onclick="activate()">Activer</button>
 
 <script>
-function askPermission() {
-  Notification.requestPermission().then(permission => {
-    if (permission === "granted") {
-      alert("Autorisation accordée");
-    } else {
-      alert("Autorisation refusée");
-    }
-  });
+async function activate() {
+  if (!("serviceWorker" in navigator)) {
+    alert("Service Worker non supporté");
+    return;
+  }
+
+  const permission = await Notification.requestPermission();
+  if (permission !== "granted") {
+    alert("Autorisation refusée");
+    return;
+  }
+
+  await navigator.serviceWorker.register("sw.js");
+  alert("Service Worker actif");
 }
 </script>
 
